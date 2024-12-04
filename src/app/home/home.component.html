@@ -1,0 +1,24 @@
+<form class="mt-5" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h3 class="text-dark text-center">Add User</h3>
+
+    <input type="text" id="name" class="form-control" placeholder="Name" formControlName="name"/>
+    <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-danger">
+      <small *ngIf="userForm.get('name')?.errors?.['required']">Name is required.</small>
+      <small *ngIf="userForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</small>
+    </div>
+  
+    <input type="text" class="form-control mt-2" placeholder="Phone Number" formControlName="phone"/>
+    <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched" class="text-danger">
+      <small *ngIf="userForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+      <small *ngIf="userForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
+    </div>
+  
+    <button class="btn btn-primary w-100 mt-2" type="submit" [disabled]="userForm.invalid">
+      Add
+    </button>
+  
+    <div class="alert alert-success mt-2" *ngIf="submitted">
+      <h6>Successfully Saved!</h6>
+    </div>
+  </form>
+  
